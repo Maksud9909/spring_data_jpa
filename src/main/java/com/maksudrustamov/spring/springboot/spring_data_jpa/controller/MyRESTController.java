@@ -3,8 +3,9 @@ package com.maksudrustamov.spring.springboot.spring_data_jpa.controller;
 
 
 
-import com.maksudrustamov.spring.springboot.entity.Employee;
-import com.maksudrustamov.spring.springboot.service.EmployeeService;
+
+import com.maksudrustamov.spring.springboot.spring_data_jpa.entity.Employee;
+import com.maksudrustamov.spring.springboot.spring_data_jpa.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,6 +48,11 @@ public class MyRESTController {
         employeeService.deleteEmployee(id);
             return "Employee with this " + id + " deleted";
         }
+
+    @GetMapping("/employees/name/{name}")
+    public List<Employee> getAllByName(@PathVariable String name){
+        return employeeService.findAllByName(name);
+    }
 
 
     }

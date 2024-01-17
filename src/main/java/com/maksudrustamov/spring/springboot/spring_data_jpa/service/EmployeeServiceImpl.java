@@ -1,38 +1,49 @@
 package com.maksudrustamov.spring.springboot.spring_data_jpa.service;
 
 
-import com.maksudrustamov.spring.springboot.DAO.EmployeeDAO;
-import com.maksudrustamov.spring.springboot.entity.Employee;
+
+import com.maksudrustamov.spring.springboot.spring_data_jpa.DAO.EmployeeRepository;
+import com.maksudrustamov.spring.springboot.spring_data_jpa.entity.Employee;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
-    EmployeeDAO employeeDAO;
+    EmployeeRepository employeeRepository;
     @Override
-    @Transactional // Spring itself will close all transactions
+    // аннтоцию transactional можно убрать потому-что JpaRepository сам это делает
     public List<Employee> getAllEmployees() {
-        return employeeDAO.getAllEmployees();
+        return employeeRepository.findAll();
     }
 
     @Override
-    @Transactional // Spring itself will close all transactions
     public void saveEmployee(Employee employee) {
-        employeeDAO.saveEmployee(employee);
+        employeeRepository.save(employee);
     }
 
     @Override
-    @Transactional
     public Employee getEmployee(int id) {
-        return employeeDAO.getEmployee(id);
+        Employee employee = null;
+        Optional<Employee> optional = employeeRepository.findById(id);
+        if (optional.isPresent()){
+            employee = optional.get();
+        }
+        return employee;
+
     }
 
     @Override
-    @Transactional
     public void deleteEmployee(int id) {
-        employeeDAO.deleteEmployee(id);
+        employeeRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Employee> findAllByName(String name) {
+        return employeeRepository.findAllByName(name);
     }
 }
