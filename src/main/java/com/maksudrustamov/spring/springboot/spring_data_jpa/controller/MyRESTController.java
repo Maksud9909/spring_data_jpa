@@ -18,7 +18,7 @@ public class MyRESTController {
     @Autowired
     EmployeeService employeeService;
 
-    @GetMapping("/employees") // это обозначает, что мы в сылке делаем метод get
+    @GetMapping("/employees") // это обозначает, что мы в сылки делаем метод get
     public List<Employee> showAllEmployees(){
         List<Employee> allEmployees = employeeService.getAllEmployees();
         return allEmployees; // теперь он это конвертирует в JSON, через Jackson
