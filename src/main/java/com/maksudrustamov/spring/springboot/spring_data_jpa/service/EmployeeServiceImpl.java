@@ -4,7 +4,6 @@ package com.maksudrustamov.spring.springboot.spring_data_jpa.service;
 
 import com.maksudrustamov.spring.springboot.spring_data_jpa.DAO.EmployeeRepository;
 import com.maksudrustamov.spring.springboot.spring_data_jpa.entity.Employee;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
